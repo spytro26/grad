@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset ="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forget Password UI</title>
+    <style>
+        body{
+            background-color: #f2f2f2;
+        }
+
+        #box{
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            margin-left: 450px;
+            margin-top: 30px;
+            border: 1px solid lawngreen;
+        }
+        h1{
+            color: blue;
+        }
+        .input-box{
+            width: 260px;
+            height: 30px;
+            margin-top: 10px;
+        }
+        #captcha{
+            background-color: #eeeeee;
+            padding: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id ="box">
+        <h1>Forgot user ID or password?</h1>
+        <input type="radio" id="remember"  value="remember">
+        <label for="remember">I remember my user ID</label><br>
+        <input type="radio" id="forget"  value="forget">
+        <label for="forget">I forgot my user ID</label><br>
+        <input class="input-box" type="text" placeholder="User ID">
+        <input class="input-box" type="text" placeholder="PAN">
+        <br><br>
+        Receive OTP on
+        <input type="radio" id="otp"  value="otp">
+        E-mail
+        <input type="radio" id="otp1"  value="otp1">
+        Sms
+        <div id"captcha">
+            <h1>573717</h1>
+            <input class="input-box" type="text" placeholder="Captcha">
+        </div>
+        <button>Reset</button>
+        <br><br>
+        <a href="">Back to login</a>
+    </div>
+
+</body>
+</html>
