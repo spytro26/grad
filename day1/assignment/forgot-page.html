@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forget page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div class="content">
+    <div class="box1">
+        <!-- <img src="https://kite.zerodha.com/static/images/kite-logo.svg" alt="loading> -->
+        <h2>Forget user ID or password?</h2>
+        <div class ="radio-grp">
+            <div>
+                <input id="remember" type="radio" name="radio" >
+                <label for="remember">I remember my user ID</label>
+            </div>
+            <div>
+                <input id="forget"  type="radio" name="radio" >
+                   <label for="forget">I forget my user ID</label>
+            </div>
+        </div>
+
+        <input  type="text" placeholder="User ID">
+        <input type="text" placeholder="PAN">
+        <div class="otp-section">
+            <span>
+                Recieve OTP on 
+            </span>
+            <div>
+                <label >
+                    <input type="radio"  name="OTP"  id="email">
+                    E-mail
+                </label>
+                <label>
+                    <input type="radio"  name="OTP" id="sms" >
+                    SMS
+                </label>
+            </div>
+        </div>
+            
+        <input type="text" placeholder="Mobile no(as on account)">
+        <input type="text" placeholder="E-mail(as on account)">
+        <button class="btn"> Reset</button>
+        <a href="http://127.0.0.1:5500/login.html"><< back to login </a>
+    </div>
+</div>
+    
+</body>
+</html>
