@@ -1,0 +1,1 @@
+write promisified  function of reading a  file , setTimeout , fetch
