@@ -1,0 +1,5 @@
+querySelector
+querySelectorAll
+getElementById
+getElementByClassName
+getElementsByClassName
