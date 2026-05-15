@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 4 - Todo App</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 400px;
+      margin: 60px auto;
+      background: #fdf9f3;
+      color: #2a2a2a;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    p {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 70%;
+      padding: 8px 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font-size: 15px;
+      background: #2a2a2a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid #e8e0d5;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Day 4 — Todo App</h1>
+  <p>Using the DOM to add items to a list.</p>
+
+  <input type="text" id="todo-input" placeholder="Enter a task..." />
+  <button id="add-btn">Add</button>
+
+  <ul id="todo-list"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
