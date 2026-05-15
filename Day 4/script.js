@@ -7,8 +7,6 @@ button.addEventListener("click", function() {
 
   let item = document.createElement("li");
   item.textContent = text;
-
   list.appendChild(item);
-
   input.value = "";
 });
