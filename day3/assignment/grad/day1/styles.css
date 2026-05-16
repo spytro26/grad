@@ -1,0 +1,19 @@
+h3 {
+    color: yellow;
+    margin-top:100px ;
+
+}
+#something {
+
+}
+
+#parent {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.child{
+    border: red 1px dotted;
+    margin : 5px
+}

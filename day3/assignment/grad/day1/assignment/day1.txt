@@ -1,0 +1,7 @@
+1)try to  make this site by your own  using html css . it should not be pixel perfect but it should 
+be close to the original one   https://kite.zerodha.com/
+
+
+2) learn about  the semantic , break and inline tags
+
+
