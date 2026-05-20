@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Forgot Password</title>
+
+    <style>
+
+        body{
+            background-color: #f2f2f2;
+        }
+
+        #box{
+            background-color: white;
+            width: 320px;
+            padding: 30px;
+            margin-left: 420px;
+            margin-top: 20px;
+            border: 1px solid lightgray;
+        }
+
+        #logo{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2{
+            color: #2c3e50;
+            font-weight: normal;
+        }
+
+        .input-box{
+            width: 290px;
+            height: 35px;
+            margin-top: 10px;
+            border: 1px solid lightgray;
+            padding-left: 10px;
+        }
+
+        #captcha-box{
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #eeeeee;
+}
+
+        #captcha-image{
+            background-color: white;
+            border: 1px solid lightgray;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #captcha-image h1{
+            color: darkolivegreen;
+            font-style: italic;
+            font-size: 50px;
+            font-weight: normal;
+        }
+
+        #btn{
+            width: 302px;
+            height: 45px;
+            background-color: #ff5a1f;
+            color: white;
+            border: none;
+            margin-top: 25px;
+            font-size: 25px;
+        }
+
+        #back{
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a{
+            text-decoration: none;
+            color: gray;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="box">
+
+        <div id="logo">
+            <img src="https://kite.zerodha.com/static/images/kite-logo.svg" width="120px">
+        </div>
+
+        <h2>Forgot user ID or password?</h2>
+
+        <input type="radio" name="user" checked>
+        I remember my user ID
+
+        <br><br>
+
+        <input type="radio" name="user">
+        I forgot my user ID
+
+        <br><br>
+
+        <input class="input-box" type="text" placeholder="User ID">
+
+        <br><br>
+
+        <input class="input-box" type="text" placeholder="PAN">
+
+        <br><br><br>
+
+        Receive OTP on
+
+        <input type="radio" name="otp" checked>
+        E-mail
+
+        <input type="radio" name="otp">
+        SMS
+
+        <br><br>
+
+        <input class="input-box" type="text" placeholder="E-mail (as on account)">
+
+        <div id="captcha-box">
+
+            <div id="captcha-image">
+                <h1>573717</h1>
+            </div>
+
+            <input class="input-box" type="text" placeholder="Captcha">
+
+        </div>
+
+        <button id="btn">
+            Reset
+        </button>
+
+        <div id="back">
+            <a href="">« Back to login</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
