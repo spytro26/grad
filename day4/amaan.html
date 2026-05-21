@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+    <style>
+        body{
+            font-family: Arial;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1{
+            text-align: center;
+        }
+        input{
+            width: 70%;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button{
+            padding: 8px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li{
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        li.done{
+            text-decoration: line-through;
+            color: gray;
+        }
+        .del{
+            color: red;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My To Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a task...">
+    <button onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        
+        function addTask(){
+            let input = document.getElementById("taskInput");
+            let task = input.value;
+
+            if(task == ""){
+                alert("please enter a task");
+                return;
+            }
+
+            
+            let li = document.createElement("li");
+            li.innerHTML = task;
+
+            
+            li.onclick = function(){
+                li.classList.toggle("done");
+            }
+
+            
+            let btn = document.createElement("button");
+            btn.innerHTML = "x";
+            btn.className = "del";
+            btn.onclick = function(e){
+                e.stopPropagation();
+                li.remove();
+            }
+
+            li.appendChild(btn);
+            document.getElementById("taskList").appendChild(li);
+
+            
+            input.value = "";
+        }
+
+        
+        document.getElementById("taskInput").addEventListener("keypress",function(e){
+            if(e.key == "Enter"){
+                addTask();
+            }
+        });
+    </script>
+</body>
+</html>
