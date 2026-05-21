@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+  
+    <input id="jls" type="text">
+    <button onclick=""> submit</button>
+   <div id="ank"> <h1> ankush  3  </h1></div>
+   <div id="something"> <h1> ayush  </h1> </div>
+        <h1> secodn h1</h1>
+        <h1> jlsjl </h1>
+
+
+      <script>
+    const title = document.querySelector("div");
+    console.log(title.textContent);
+
+
+    title.innerHTML = "ankush "
+     console.log(title.textContent);
+     // update 
+     const tr  = document.querySelectorAll("h1");
+     console.log(tr[0]);
+      tr.innerHTML = "ankush";
+      // delete 
+    const ele = document.getElementById("something");
+     ele.parentNode.removeChild(ele);
+
+
+    // const titl3 = document.querySelector("h1");
+    // const selectedbyId = document.selectedbyId()
+    // titl3.innerHTML="ankush"
+
+    // const title3 = document.q
+// create using dom 
+
+    const inputEl = document.getElementById("inp");
+    const  textNode = document.createElement("div");
+    textNode.innerHTML = inputEl.innerHTML
+     const parentEl = document.getElementById("todos");
+     parentEl.appendChild(textNode);
+     
+
+
+
+
+</script> 
+</body>
+</html>
+
+
+
+
+
+<!-- 
+querySelector(h1)
+querySelectorAll('h1')
+getElementbyId
+getElementbyclasName -->
