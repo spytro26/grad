@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+    <style>
+        body {
+            background-color: #111827;
+            font-family: Arial;
+        }
+
+        h1 {
+            
+            text-align: center;
+        }
+        h3{
+            color: white;
+            font-size:36px ;
+            font-family: arial, sans-serif;
+        }
+
+        #mainbox {
+            width: 500px;
+            margin: 0 auto;
+            background-color:#1f2937;
+            padding: 20px;
+            
+        }
+
+        input {
+            width: 300px;
+            padding: 5px;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        
+        .delbtn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        li {
+            font-size: 20px;
+            margin-top: 10px;
+            list-style-type: square;
+            color: aliceblue;
+        }
+
+        
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        #mylist {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        p {
+
+            font-size: 13px;
+        }
+
+        
+            margin-top: 20px;
+            border-top: 1px solid lightgray;
+            padding-top: 10px;
+
+            font-size: 14px;
+            color: darkgreen;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+    <h1></h1> My To Do List</h1>
+
+
+    <div id="mainbox">
+
+
+        <h3>Add a new task:</h3>
+
+        
+        <input type="text" id="taskInput" placeholder="type task here...">
+
+        <button onclick="addTask()">Add</button>
+
+        
+
+        <p id="errormsg"></p>
+
+        
+
+        <ul id="mylist">
+
+        </ul>
+
+
+        
+        <div id="counterbox">
+
+            Total tasks: <span id="totalcount">0</span> &nbsp;|&nbsp;
+            Done: <span id="donecount">0</span>
+        </div>
+
+
+    </div>
+
+    <script>
+
+        
+
+        function addTask() {
+
+            
+
+            const inputBox = document.getElementById("taskInput");
+            const taskText = inputBox.value;
+
+            // check if user typed anything
+            if (taskText == "") {
+                document.getElementById("errormsg").innerHTML = "Please type something first!";
+                return; // stop the function
+            }
+
+            // clear the error message if it was showing
+            document.getElementById("errormsg").innerHTML = "";
+
+            // get the list element
+            const myList = document.getElementById("mylist");
+
+            // create a new list item
+            const newItem = document.createElement("li");
+
+            // put the task text inside the li
+            newItem.innerHTML = taskText;
+
+            // create the done button
+            const doneBtn = document.createElement("button");
+            doneBtn.innerHTML = "Done";
+            doneBtn.style.backgroundColor = "blue";
+            doneBtn.style.color = "white";
+            doneBtn.style.border = "none";
+            doneBtn.style.padding = "3px 8px";
+            doneBtn.style.marginLeft = "10px";
+            doneBtn.style.cursor = "pointer";
+
+
+            
+
+            doneBtn.onclick = function() {
+                
+                if (newItem.className == "done") {
+
+                    newItem.className = "";
+                } else {
+                    newItem.className = "done";
+
+                }
+
+                updateCounter(); // update the counter everytime
+
+            };
+
+            // create delete button
+
+            const delBtn = document.createElement("button");
+            delBtn.innerHTML = "Delete";
+            delBtn.className = "delbtn";
+
+
+            // delete the task when delete button is clicked
+            delBtn.onclick = function() {
+                myList.removeChild(newItem);
+
+                updateCounter();
+
+            };
+
+            // add both buttons to the list item
+
+            newItem.appendChild(doneBtn);
+            newItem.appendChild(delBtn);
+
+
+            
+            myList.appendChild(newItem);
+
+
+            
+            inputBox.value = "";
+
+
+            
+            updateCounter();
+        }
+
+
+        
+        function updateCounter() {
+
+
+            
+
+            const allTasks = document.querySelectorAll("#mylist li");
+            const doneTasks = document.querySelectorAll("#mylist li.done");
+
+
+            
+            document.getElementById("totalcount").innerHTML = allTasks.length;
+
+            document.getElementById("donecount").innerHTML = doneTasks.length;
+        }
+
+
+        
+        const inputField = document.querySelector("#taskInput");
+
+        inputField.onkeydown = function(event) {
+
+            if (event.key == "Enter") {
+
+                addTask();
+            }
+
+        };
+
+
+    </script>
+
+
+</body>
+</html>
