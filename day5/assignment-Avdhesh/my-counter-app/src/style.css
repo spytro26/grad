@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #0d0d0f;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8e6df;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ── Heading ────────────────────────────────────── */
+.app-heading {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 000;
+  letter-spacing: 0.0em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 40px #ffffff;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Layout ─────────────────────────────────────── */
+.counter-wrap {
+  position: relative;
+  padding: 2.5rem 1.5rem 2rem;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  background: #16161a;
+  border: 1px solid #2a2a30;
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px #1e1e24,
+    0 24px 64px rgba(0,0,0,0.6),
+    0 0 80px rgba(99, 102, 241, 0.04);
+  overflow: hidden;
+}
+
+/* ── Particle layer ─────────────────────────────── */
+.particle-layer {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  top: 38%;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0;
+  animation: floatUp 0.7s ease-out forwards;
+  user-select: none;
+}
+
+.p-inc { color: #34d399; }
+.p-dec { color: #f87171; }
+
+@keyframes floatUp {
+  0%   { opacity: 1;   transform: translateY(0)   scale(1);    }
+  100% { opacity: 0;   transform: translateY(-70px) scale(0.6); }
+}
+
+/* ── Number Display ─────────────────────────────── */
+.counter-display {
+  text-align: center;
+  margin-bottom: 2rem;
+  user-select: none;
+}
+
+.count-number {
+  font-size: 100px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -6px;
+  color: #e8e6df;
+  transition: transform 0.15s cubic-bezier(.34,1.56,.64,1), color 0.25s ease;
+  display: inline-block;
+  will-change: transform;
+}
+
+.count-number.bump     { transform: scale(1.12); }
+.count-number.positive { color: #34d399; text-shadow: 0 0 40px rgba(52,211,153,0.3); }
+.count-number.negative { color: #f87171; text-shadow: 0 0 40px rgba(248,113,113,0.3); }
+.count-number.zero     { color: #e8e6df; text-shadow: none; }
+
+@keyframes shake {
+  0%,100% { transform: translateX(0);   }
+  20%      { transform: translateX(-8px); }
+  40%      { transform: translateX(8px);  }
+  60%      { transform: translateX(-5px); }
+  80%      { transform: translateX(5px);  }
+}
+.count-number.shake { animation: shake 0.4s ease; }
+
+.count-label {
+  font-size: 11px;
+  color: #555560;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* ── Main Buttons ───────────────────────────────── */
+.btn-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.btn-main {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1px solid #2e2e38;
+  background: #1e1e26;
+  color: #e8e6df;
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.2s, border-color 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.btn-main:hover {
+  background: #26263a;
+  border-color: #6366f1;
+  box-shadow: 0 0 16px rgba(99,102,241,0.25), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.btn-main:active { transform: scale(0.88); }
+
+.btn-reset {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #2e2e38;
+  background: transparent;
+  color: #555560;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-reset:hover { background: #2a1a1a; color: #f87171; border-color: #f87171; }
+.btn-reset:active { transform: scale(0.9); }
+
+/* ── Step Selector ──────────────────────────────── */
+.step-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.75rem;
+}
+
+.step-label {
+  font-size: 11px;
+  color: #555560;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.step-btn {
+  padding: 5px 16px;
+  border-radius: 999px;
+  border: 1px solid #2e2e38;
+  background: transparent;
+  color: #555560;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.step-btn.active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+  box-shadow: 0 0 12px rgba(99,102,241,0.4);
+}
+
+.step-btn:hover:not(.active) { background: #1e1e26; color: #e8e6df; border-color: #555560; }
+
+/* ── Stats Row ──────────────────────────────────── */
+.stats-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.stat-card {
+  flex: 1;
+  background: #1e1e26;
+  border: 1px solid #2e2e38;
+  border-radius: 12px;
+  padding: 10px 8px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.stat-card:hover { border-color: #6366f1; }
+
+.stat-val {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e8e6df;
+  line-height: 1.2;
+}
+
+.stat-lbl {
+  font-size: 10px;
+  color: #555560;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Undo ───────────────────────────────────────── */
+.undo-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.btn-undo {
+  background: transparent;
+  border: 1px solid #2e2e38;
+  color: #888890;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-undo:hover:not(.disabled) {
+  background: #1e1e26;
+  color: #e8e6df;
+  border-color: #6366f1;
+}
+
+.btn-undo.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* ── Keyboard hint ──────────────────────────────── */
+.hint {
+  text-align: center;
+  font-size: 10.5px;
+  color: #383840;
+  letter-spacing: 0.06em;
+}
