@@ -27,7 +27,7 @@ export default function App () {
  }
   const [fl , useFl ] = useState();
 
-useEffect( anku , [ ]);
+useEffect( anku , []);
 
  
 

@@ -1,9 +1,5 @@
 import { useState } from "react";
 
-
-
-
-
 function App () {
 
   let [noti , useNoti] = useState(10);
@@ -11,7 +7,6 @@ function App () {
 
   function update() {
     useNoti(noti+1);
-  
 
  }
 
@@ -35,12 +30,13 @@ function App () {
 
 
 
+
 function  LearningComp ({des  , numb , title   } : any ) {
 
   
 
 
-  return <div>
+  return <>
     <div style={{display : "flex"    }}>
       <div style={{marginRight:"30px"}}>
         {numb}
@@ -58,7 +54,7 @@ function  LearningComp ({des  , numb , title   } : any ) {
     </div>
 
     
-  </div>
+  </>
 
 
 }
