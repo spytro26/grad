@@ -50,6 +50,7 @@ function App() {
   } , [fil  , listTodo])
 
   // const demo = {
+  
   //   title : "eat " , 
   //   done :  false , 
     
@@ -71,6 +72,40 @@ function App() {
 
 
    }
+
+
+     function mark (idx) {
+      for(let i = 0; i<list.length; i++){
+        if(i == idx){
+          list[i].done = true;
+        }
+      }
+
+
+     }
+
+
+     function del (idx){
+      // array delete
+      let li = list.filter((x , id )=>{
+        if(id == idx){
+          return false;
+
+        }
+        else {
+          return true;
+        }
+
+      });
+      
+      setList(li);
+
+
+
+
+
+     }
+
 
 
     return  <div className='min-h-screen min-w-screen bg-[#33abdb]'>
@@ -105,10 +140,10 @@ function App() {
                 <div>
                       {x.title}
                 </div>
-                <div>
+                <div onClick={()=>mark(index)}>
                   mark as done 
-                </div>
-                <div>
+                </div >
+                <div onClick={()=>del(index)}>
                   delete 
                 </div>
               
