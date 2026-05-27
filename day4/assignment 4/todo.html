@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My To-Do List</title>
+
+  <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================
+       HTML = STRUCTURE (what things ARE)
+       ============================ -->
+
+  <div class="container">
+    <h1>📝 My To-Do List</h1>
+
+    <!-- Input area: text box + add button -->
+    <div class="input-area">
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button id="addBtn" onclick="addTask()">Add</button>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('active', this)">Active</button>
+      <button class="filter-btn" onclick="setFilter('done', this)">Done</button>
+    </div>
+
+    <!-- Summary count -->
+    <div class="summary" id="summary">0 tasks remaining</div>
+
+    <!-- The task list — tasks are added here by JavaScript -->
+    <ul id="taskList"></ul>
+
+    <!-- Clear completed button -->
+    <button class="clear-btn" onclick="clearCompleted()">Clear completed</button>
+  </div>
+
+  <!-- Link to the JS file (always at the bottom of body) -->
+  <script src="script.js"></script>
+
+</body>
+</html>
