@@ -3,15 +3,17 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css'
   
 function App() {
-  const [listTodo , setListTodo] = useState([]);
-  const [fil , setFil ] = useState('all');
-  const[list , setList]  = useState([]);
+  const [listTodo , setListTodo] = useState([]);  // cotains all the to do 
+  const [fil , setFil ] = useState('all');   // state contains the current filter value 
+  const[list , setList]  = useState([]);  // contains the filtered to do 
+
   useEffect(()=>{
     // completed , all , pending 
     if(fil == "all"){
       setList(listTodo)
       
     }
+
     else if(fil=="pending"){
       let ans = listTodo.filter((x)=>{
        if(x.done == false){
@@ -50,12 +52,13 @@ function App() {
   } , [fil  , listTodo])
 
   // const demo = {
-  
+        // id : 0 
   //   title : "eat " , 
   //   done :  false , 
     
   // }
   const inputRef  = useRef();
+
 
 
    function addTodo() {
@@ -87,7 +90,7 @@ function App() {
 
      function del (idx){
       // array delete
-      let li = list.filter((x , id )=>{
+      let li = list.filter((x , idx )=>{
         if(id == idx){
           return false;
 
@@ -124,7 +127,7 @@ function App() {
 
           <div className='ml-4'>
            <select className='bg-orange-400 p-2  ' onChange={(e)=>{return setFil(e.target.value)}}>
-                <option value="all"> All</option>
+                <option value="all"> All </option>
                 <option value="pending"> Pending</option>
                 <option value="completed"> completed</option>
 
