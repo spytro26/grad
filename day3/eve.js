@@ -45,3 +45,9 @@ let obj2 = new stud("ayush" , "30" , 32);
 
  ankush("https://jsonplaceholder.typicode.com/todos/1");
  console.log("outside the ankush function ");
+
+querySelector
+querySelectorAll
+getElementById
+getElementByClassName
+getElementsByClassName
