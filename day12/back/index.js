@@ -4,8 +4,12 @@ app.use(express.json());
 
  const  users = [] ;
  const loginedUsers = [];
+ const transactions = [] ;
   let a = 0 ; 
   
+
+
+
 // {
 //     id : 2,
 
@@ -15,11 +19,11 @@ app.use(express.json());
 //     balance : "jlsj"
 // }
 
-function getToken(){
+function getToken( ){
     let arr = [ 1 , "a" , "b" , "s" , 2 , 3 , 4 , 6, 7, 8, 9 , "c" , "e"];
     let  token="";
     let size = arr.length -1     ;  
-    for(let i = 0; i<20; i++){
+    for(let i = 0; i<30; i++){
     token = token +   arr[parseInt(size * Math.random())]
     }
     
@@ -73,7 +77,9 @@ app.post("/signup" , (req , res)=>{
         name    ,
         username : username  , 
         password  : password  ,
-        balance : 2000  
+        balance : 2000  ,
+        pinEnabled : false , 
+        pin : "" 
 
 
 
@@ -143,17 +149,44 @@ function checkAuth(req , res , next){
 
 
  app.use(checkAuth);
+
+ app.post("/setpin" , (req , res)=>{
+    // 
+   const {pin , id } = req.body;
+
+   //otp
+
+   for(let i =0; i<users.length ; i++){
+        if(users[i].id == id){
+            users[i].pin = pin;
+            users[i].pinEnabled = true;
+        }
+
+   }
+   return res.json({message : "pin set "})
+     
+
+    
+ })
+
+
+
 // improvement add upi pin functionality 
 app.get("/bal"  ,  (req , res)=>{
     // id password 
  
-    const {id} = req.body;
+    const {id ,pin} = req.body;
+    if(!id || !pin){
+        return res.json({message : "insufficent data for fetching balance"})
+    }
+
     for(let i =0; i<users.length ; i++){
-        if(id == users[i].id){
+        if(id == users[i].id && pin == users[i].pin && pinEnabled){
             return res.json({balance : users[i].balance});
         }
     }
-
+     
+    return res.json({msg : "wrong pin or pin not enabled"})
 
   
 
@@ -166,17 +199,21 @@ app.get("/bal"  ,  (req , res)=>{
 
 // same improvment as /bal endpoint
  function moneytransfer(req , res){
-    const {id , recId , balance} = req.body;
+    const {id , pin , recId , balance} = req.body;
     if(!recId || !balance){
         return ; 
 
     }
        let sender ; 
-       for(let i=0; i<users.length ; i++){
-            if(users[i].id == id){
+       for(let i=0; i<users.length ; i++){ 
+            if(users[i].id == id && users[i].pin == pin && pinEnabled ){
                 sender = users[i];
             }
        }  
+       if(!sender){
+          return res.json({msg : "wrong pin "});
+
+       }
 
        if(balance > sender.balance){
         return  res.json({message : "insufficent money"});
@@ -190,6 +227,16 @@ app.get("/bal"  ,  (req , res)=>{
             users[i].balance = users[i].balance + balance;
            }
        } 
+
+
+       transactions.push({
+        senderId  : id  ,
+        recieverId : recId, 
+        balance , 
+        date : Date.now() , 
+
+         
+       })
 
        return res.json({message : "money transfered"});
 
@@ -207,37 +254,37 @@ app.post("/transfer"  , moneytransfer);
 
 
 
-            // assignment 
+            
 
 
 
 
 
- // returns the user data like its name , username , etc
-app.get("/userDetails"  , (req , res)=>{
-
-})
-
-
-// update the user Data like changing the username , name phone etc , 
-
-app.post("/userDetails" , (req , res)=>{
-
-})
-// update the usesr balance with the credited money 
-app.post("/creditmoney" , (req ,res)=>{
-
-})
-
-// atm withdrwaal 
-app.post("/debitmoney" ,(req, res)=>{
-
-})
 
 // it should return something like bank statement 
 // should must conatain - sender reciver balance senderId , reciverId ; 
 
 app.post("/showhistory", (req, res)=>{
+const {id} = req.id; 
+
+ let tran = [];
+ for(let i =0;i<transactions.length ; i++){
+    if(transactions[i].senderId == id || transactions[i].recieverId){
+        tran.push(transactions[i]);
+    }
+ }
+  
+ let sortedArr= tran.sort((a , b)=>{
+    return (b.date - a.date);
+ })
+
+  
+
+
+
+
+ 
+
 
 })
 
