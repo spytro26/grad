@@ -4,6 +4,7 @@ app.use(express.json());
 
  const  users = [] ;
  const loginedUsers = [];
+ const transactionHistory = [];
   let a = 0 ; 
   
 // {
@@ -167,34 +168,48 @@ app.get("/bal"  ,  (req , res)=>{
 // same improvment as /bal endpoint
  function moneytransfer(req , res){
     const {id , recId , balance} = req.body;
-    if(!recId || !balance){
-        return ; 
-
+    if(!recId || balance === undefined){
+        return res.status(400).json({message : "missing data"});
     }
-       let sender ; 
-       for(let i=0; i<users.length ; i++){
-            if(users[i].id == id){
-                sender = users[i];
-            }
-       }  
 
-       if(balance > sender.balance){
+    const amount = Number(balance);
+    if(Number.isNaN(amount) || amount <= 0){
+        return res.status(400).json({message : "invalid amount"});
+    }
+
+    let sender;
+    let receiver;
+    for(let i=0; i<users.length ; i++){
+        if(users[i].id == id){
+            sender = users[i];
+        }
+        if(users[i].id == recId){
+            receiver = users[i];
+        }
+    }
+
+    if(!sender || !receiver){
+        return res.status(404).json({message : "user not found"});
+    }
+
+    if(amount > sender.balance){
         return  res.json({message : "insufficent money"});
-       }
+    }
 
-       for(let i =0; i<users.length ; i++){
-           if(users[i].id == id ){
-               users[i].balance = users[i].balance - balance;
-           }
-           if(users[i].id == recId){
-            users[i].balance = users[i].balance + balance;
-           }
-       } 
+    sender.balance = sender.balance - amount;
+    receiver.balance = receiver.balance + amount;
 
-       return res.json({message : "money transfered"});
+    transactionHistory.push({
+        type: "transfer",
+        senderId: sender.id,
+        receiverId: receiver.id,
+        amount,
+        senderBalance: sender.balance,
+        receiverBalance: receiver.balance,
+        at: new Date().toISOString()
+    });
 
-
-    
+    return res.json({message : "money transfered"});
  }
 
 
@@ -215,30 +230,127 @@ app.post("/transfer"  , moneytransfer);
 
  // returns the user data like its name , username , etc
 app.get("/userDetails"  , (req , res)=>{
+    const {id} = req.body;
+    const user = users.find((u) => u.id == id);
+    if(!user){
+        return res.status(404).json({message : "user not found"});
+    }
 
+    const {password, ...safeUser} = user;
+    return res.json({user: safeUser});
 })
 
 
 // update the user Data like changing the username , name phone etc , 
 
 app.post("/userDetails" , (req , res)=>{
+    const {id , name , username , phone , password} = req.body;
+    const user = users.find((u) => u.id == id);
+    if(!user){
+        return res.status(404).json({message : "user not found"});
+    }
 
+    if(username && username !== user.username){
+        if(ispresent(username) == false){
+            return res.status(401).json({message : "username already taken "});
+        }
+        user.username = username;
+    }
+
+    if(name){
+        user.name = name;
+    }
+
+    if(phone){
+        user.phone = phone;
+    }
+
+    if(password){
+        if(password.length < 8){
+            return res.status(400).json({message : "weak password"});
+        }
+        user.password = password;
+    }
+
+    const {password: hidden, ...safeUser} = user;
+    return res.json({message : "user updated", user: safeUser});
 })
 // update the usesr balance with the credited money 
 app.post("/creditmoney" , (req ,res)=>{
+    const {id , balance} = req.body;
+    const user = users.find((u) => u.id == id);
+    if(!user){
+        return res.status(404).json({message : "user not found"});
+    }
 
+    const amount = Number(balance);
+    if(Number.isNaN(amount) || amount <= 0){
+        return res.status(400).json({message : "invalid amount"});
+    }
+
+    user.balance = user.balance + amount;
+
+    transactionHistory.push({
+        type: "credit",
+        senderId: null,
+        receiverId: user.id,
+        amount,
+        senderBalance: null,
+        receiverBalance: user.balance,
+        at: new Date().toISOString()
+    });
+
+    return res.json({message : "money credited", balance: user.balance});
 })
 
 // atm withdrwaal 
 app.post("/debitmoney" ,(req, res)=>{
+    const {id , balance} = req.body;
+    const user = users.find((u) => u.id == id);
+    if(!user){
+        return res.status(404).json({message : "user not found"});
+    }
 
+    const amount = Number(balance);
+    if(Number.isNaN(amount) || amount <= 0){
+        return res.status(400).json({message : "invalid amount"});
+    }
+
+    if(amount > user.balance){
+        return  res.json({message : "insufficent money"});
+    }
+
+    user.balance = user.balance - amount;
+
+    transactionHistory.push({
+        type: "debit",
+        senderId: user.id,
+        receiverId: null,
+        amount,
+        senderBalance: user.balance,
+        receiverBalance: null,
+        at: new Date().toISOString()
+    });
+
+    return res.json({message : "money debited", balance: user.balance});
 })
 
 // it should return something like bank statement 
 // should must conatain - sender reciver balance senderId , reciverId ; 
 
 app.post("/showhistory", (req, res)=>{
+    const {id} = req.body;
+    if(!id){
+        return res.status(400).json({message : "missing data"});
+    }
 
+    const user = users.find((u) => u.id == id);
+    if(!user){
+        return res.status(404).json({message : "user not found"});
+    }
+
+    const history = transactionHistory.filter((t) => t.senderId == id || t.receiverId == id);
+    return res.json({history});
 })
 
 
